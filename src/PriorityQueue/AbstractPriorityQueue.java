@@ -3,7 +3,6 @@ package PriorityQueue;
 import java.util.Comparator;
 import java.util.LinkedList;
 
-
 public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> {
     // Class Variables //
     protected LinkedList<Entry<K, V>> queue;
@@ -33,4 +32,8 @@ public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> {
     public abstract V removeMin();
 
     public abstract V min();
+
+    public abstract V removeMax();
+
+    public abstract V max();
 }
