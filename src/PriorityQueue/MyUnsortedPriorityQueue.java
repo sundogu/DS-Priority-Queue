@@ -4,6 +4,9 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 public class MyUnsortedPriorityQueue<K extends Comparable<K>, V> extends AbstractPriorityQueue<K, V> {
+    // Class Variables //
+    private Entry<K, V> minEntry;
+    private Entry<K, V> maxEntry;
     // Constructors //
     public MyUnsortedPriorityQueue() {
     }
@@ -20,53 +23,83 @@ public class MyUnsortedPriorityQueue<K extends Comparable<K>, V> extends Abstrac
         }
 
         Entry<K, V> entry = new Entry<>(key, value);
-        queue.addFirst(entry);
+        queue.addLast(entry);
+
+        if (minEntry == null) {
+            minEntry = entry;
+            maxEntry = entry;
+        } else {
+            if (comparator != null) {
+                minEntry = (comparator.compare(entry.getKey(), minEntry.getKey()) < 0)? entry : minEntry;
+                maxEntry = (comparator.compare(entry.getKey(), minEntry.getKey()) > 0)? entry : maxEntry;
+            } else {
+                minEntry = (entry.getKey().compareTo(minEntry.getKey()) < 0)? entry : minEntry;
+                maxEntry = (entry.getKey().compareTo(maxEntry.getKey()) > 0)? entry : maxEntry;
+            }
+        }
+        
         return true;
     }
 
     @Override
     public V removeMin() {
-        Entry<K, V> temp = null;
+        if (minEntry != null) {
+            queue.removeFirstOccurrence(minEntry);
+        }
+        
+        Entry<K, V> tempMin = minEntry;
+        minEntry = null;
         Iterator<Entry<K, V>> itr = queue.iterator();
 
         while (itr.hasNext()) {
-            if (temp == null) {
-                temp = itr.next();
+            if (minEntry == null) {
+                minEntry = itr.next();
             } else {
                 Entry<K, V> entry = itr.next();
                 if (comparator != null) {
-                    temp = (comparator.compare(entry.getKey(), temp.getKey()) < 0)? entry : temp;
+                    minEntry = (comparator.compare(entry.getKey(),minEntry.getKey()) < 0)? entry : minEntry;
                 } else {
-                    temp = (entry.getKey().compareTo(temp.getKey()) < 0)? entry : temp;
+                    minEntry = (entry.getKey().compareTo(minEntry.getKey()) < 0)? entry : minEntry;
                 }
             }
         }
-
-        if (temp != null) {
-            queue.removeFirstOccurrence(temp);
-        }
-
-        return (temp == null)? null: temp.getValue();
+        
+        return (tempMin == null)? null: tempMin.getValue();
     }
 
     @Override
     public V min() {
-        Entry<K, V> temp = null;
+        return (minEntry == null)? null: minEntry.getValue();
+    }
+
+    @Override
+    public V removeMax() {
+        if (maxEntry != null) {
+            queue.removeFirstOccurrence(maxEntry);
+        }
+
+        Entry<K, V> tempMax = maxEntry;
+        maxEntry = null;
         Iterator<Entry<K, V>> itr = queue.iterator();
 
         while (itr.hasNext()) {
-            if (temp == null) {
-                temp = itr.next();
+            if (maxEntry == null) {
+                maxEntry = itr.next();
             } else {
                 Entry<K, V> entry = itr.next();
                 if (comparator != null) {
-                    temp = (comparator.compare(entry.getKey(), temp.getKey()) < 0)? entry : temp;
+                    maxEntry = (comparator.compare(entry.getKey(),maxEntry.getKey()) > 0)? entry : maxEntry;
                 } else {
-                    temp = (entry.getKey().compareTo(temp.getKey()) < 0)? entry : temp;
+                    maxEntry = (entry.getKey().compareTo(maxEntry.getKey()) > 0)? entry : maxEntry;
                 }
             }
         }
 
-        return (temp == null)? null: temp.getValue();
+        return (tempMax == null)? null: tempMax.getValue();
+    }
+
+    @Override
+    public V max() {
+        return (maxEntry == null)? null: maxEntry.getValue();
     }
 }
