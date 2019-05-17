@@ -6,9 +6,9 @@ import java.util.LinkedList;
 public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> {
     // Class Variables //
     /** The container that stores elements and their respective weight */
-    protected LinkedList<Entry<K, V>> queue;
+    private LinkedList<Entry<K, V>> queue;
     /** An optional comparator can be provided to override the comparing method of the key K */
-    protected Comparator<K> comparator;
+    private Comparator<K> comparator;
 
     // Constructors //
     public AbstractPriorityQueue() {
@@ -21,6 +21,14 @@ public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> {
     }
 
     // Methods //
+    protected LinkedList<Entry<K, V>> getQueue() {
+        return queue;
+    }
+
+    protected Comparator<K> getComparator() {
+        return comparator;
+    }
+
     /**
      * Determines the how many elements is in the queue.
      * @return the size of the queue.
