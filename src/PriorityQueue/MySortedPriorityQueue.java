@@ -20,12 +20,12 @@ public class MySortedPriorityQueue<K extends Comparable<K>, V> extends AbstractP
         }
 
         Entry<K, V> entry = new Entry<>(key, value);
-        ListIterator<Entry<K, V>> itr = queue.listIterator();
+        ListIterator<Entry<K, V>> itr = this.getQueue().listIterator();
 
         while (itr.hasNext()) {
             Entry<K, V> temp = itr.next();
-            if (comparator != null) {
-                if (comparator.compare(temp.getKey(), key) < 0) {
+            if (this.getComparator() != null) {
+                if (this.getComparator().compare(temp.getKey(), key) < 0) {
                     break;
                 }
             } else {
@@ -41,21 +41,21 @@ public class MySortedPriorityQueue<K extends Comparable<K>, V> extends AbstractP
 
     @Override
     public V removeMin() {
-        return (queue.isEmpty())? null: queue.removeLast().getValue();
+        return (this.getQueue().isEmpty())? null: this.getQueue().removeLast().getValue();
     }
 
     @Override
     public V min() {
-        return (queue.isEmpty())? null : queue.getLast().getValue();
+        return (this.getQueue().isEmpty())? null : this.getQueue().getLast().getValue();
     }
 
     @Override
     public V removeMax() {
-        return (queue.isEmpty())? null : queue.removeFirst().getValue();
+        return (this.getQueue().isEmpty())? null : this.getQueue().removeFirst().getValue();
     }
 
     @Override
     public V max() {
-        return (queue.isEmpty())? null : queue.getFirst().getValue();
+        return (this.getQueue().isEmpty())? null : this.getQueue().getFirst().getValue();
     }
 }
