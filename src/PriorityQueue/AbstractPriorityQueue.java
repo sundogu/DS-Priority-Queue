@@ -5,7 +5,9 @@ import java.util.LinkedList;
 
 public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> {
     // Class Variables //
+    /** The container that stores elements and their respective weight */
     protected LinkedList<Entry<K, V>> queue;
+    /** An optional comparator can be provided to override the comparing method of the key K */
     protected Comparator<K> comparator;
 
     // Constructors //
@@ -19,21 +21,59 @@ public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> {
     }
 
     // Methods //
+    /**
+     * Determines the how many elements is in the queue.
+     * @return the size of the queue.
+     */
     public int size() {
         return queue.size();
     }
 
+    /**
+     * Returns if the queue is empty or not.
+     * @return true if no elements currently in the queue, else false
+     */
     public boolean isEmpty() {
         return queue.isEmpty();
     }
 
+    /**
+     * Insert element V into the queue with its respective weight K
+     * @param key the weight of the value
+     * @param value the value to be stored
+     * @return true if the key and value pair has been stored into the queue.
+     */
     public abstract boolean insert(K key, V value);
 
+    /**
+     * Removes and returns the value V that has the least priority (or weight) using the Comparator
+     * provided during constructor initialization, or compareTo() method from the Comparable key K
+     * if no Comparator was provided.
+     * @return the value V that has the least weight / priority.
+     */
     public abstract V removeMin();
 
+    /**
+     * Retrieve the value V that has the least priority (or weight) using the Comparator
+     * provided during constructor initialization, or compareTo() method from the Comparable key K
+     * if no Comparator was provided. Does not remove the element from the queue.
+     * @return the value V that has the least weight / priority.
+     */
     public abstract V min();
 
+    /**
+     * Removes and returns the value V that has the most priority (or weight) using the Comparator
+     * provided during constructor initialization, or compareTo() method from the Comparable key K
+     * if no Comparator was provided.
+     * @return the value V that has the most weight / priority.
+     */
     public abstract V removeMax();
 
+    /**
+     * Retrieve the value V that has the most priority (or weight) using the Comparator
+     * provided during constructor initialization, or compareTo() method from the Comparable key K
+     * if no Comparator was provided. Does not remove the element from the queue.
+     * @return the value V that has the most weight / priority.
+     */
     public abstract V max();
 }
