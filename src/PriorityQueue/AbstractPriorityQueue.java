@@ -25,10 +25,6 @@ public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> {
         return queue;
     }
 
-    protected Comparator<K> getComparator() {
-        return comparator;
-    }
-
     /**
      * Determines the how many elements is in the queue.
      * @return the size of the queue.
@@ -93,7 +89,7 @@ public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> {
      * @return -1 if key1 is smaller than key2, 0 if key1 is equal to key2, 1 if key1 is greater than key2.
      */
     public int compare(K key1, K key2) {
-        if (this.getComparator() != null) {
+        if (comparator != null) {
             return comparator.compare(key1, key2);
         } else {
             return key1.compareTo(key2);
