@@ -84,4 +84,19 @@ public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> {
      * @return the value V that has the most weight / priority.
      */
     public abstract V max();
+
+    /**
+     * Compares the keys K key1 and K key2. If a Comparator was provided during initialization
+     * then the Comparator will be used for comparison, otherwise Comparable K key1 and and K key will be compared.
+     * @param key1 the comparing key
+     * @param key2 the comparer key
+     * @return -1 if key1 is smaller than key2, 0 if key1 is equal to key2, 1 if key1 is greater than key2.
+     */
+    public int compare(K key1, K key2) {
+        if (this.getComparator() != null) {
+            return comparator.compare(key1, key2);
+        } else {
+            return key1.compareTo(key2);
+        }
+    }
 }
