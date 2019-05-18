@@ -6,6 +6,7 @@ import java.util.ListIterator;
 public class MySortedPriorityQueue<K extends Comparable<K>, V> extends AbstractPriorityQueue<K, V> {
     // Constructors //
     public MySortedPriorityQueue() {
+        super();
     }
 
     public MySortedPriorityQueue(Comparator<K> comparator) {
