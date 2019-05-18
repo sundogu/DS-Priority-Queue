@@ -30,13 +30,8 @@ public class MyUnsortedPriorityQueue<K extends Comparable<K>, V> extends Abstrac
             minEntry = entry;
             maxEntry = entry;
         } else {
-            if (this.getComparator() != null) {
-                minEntry = (this.getComparator().compare(entry.getKey(), minEntry.getKey()) < 0)? entry : minEntry;
-                maxEntry = (this.getComparator().compare(entry.getKey(), minEntry.getKey()) > 0)? entry : maxEntry;
-            } else {
-                minEntry = (entry.getKey().compareTo(minEntry.getKey()) < 0)? entry : minEntry;
-                maxEntry = (entry.getKey().compareTo(maxEntry.getKey()) > 0)? entry : maxEntry;
-            }
+            minEntry = (this.compare(entry.getKey(), minEntry.getKey()) < 0)? entry : minEntry;
+            maxEntry = (this.compare(entry.getKey(), maxEntry.getKey()) > 0)? entry : maxEntry;
         }
 
         return true;
@@ -57,11 +52,7 @@ public class MyUnsortedPriorityQueue<K extends Comparable<K>, V> extends Abstrac
                 minEntry = itr.next();
             } else {
                 Entry<K, V> entry = itr.next();
-                if (this.getComparator() != null) {
-                    minEntry = (this.getComparator().compare(entry.getKey(),minEntry.getKey()) < 0)? entry : minEntry;
-                } else {
-                    minEntry = (entry.getKey().compareTo(minEntry.getKey()) < 0)? entry : minEntry;
-                }
+                minEntry = (this.compare(entry.getKey(), minEntry.getKey()) < 0)? entry : minEntry;
             }
         }
 
@@ -88,11 +79,7 @@ public class MyUnsortedPriorityQueue<K extends Comparable<K>, V> extends Abstrac
                 maxEntry = itr.next();
             } else {
                 Entry<K, V> entry = itr.next();
-                if (this.getComparator() != null) {
-                    maxEntry = (this.getComparator().compare(entry.getKey(),maxEntry.getKey()) > 0)? entry : maxEntry;
-                } else {
-                    maxEntry = (entry.getKey().compareTo(maxEntry.getKey()) > 0)? entry : maxEntry;
-                }
+                maxEntry = (this.compare(entry.getKey(), maxEntry.getKey()) > 0)? entry : maxEntry;
             }
         }
 
