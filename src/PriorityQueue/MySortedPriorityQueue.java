@@ -42,7 +42,7 @@ public class MySortedPriorityQueue<K extends Comparable<K>, V> extends AbstractP
 
     @Override
     public V removeMin() {
-        return (this.getQueue().isEmpty())? null: this.getQueue().removeLast().getValue();
+        return (this.getQueue().isEmpty())? null : this.getQueue().removeLast().getValue();
     }
 
     @Override
