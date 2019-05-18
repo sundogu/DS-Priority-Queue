@@ -25,14 +25,8 @@ public class MySortedPriorityQueue<K extends Comparable<K>, V> extends AbstractP
 
         while (itr.hasNext()) {
             Entry<K, V> temp = itr.next();
-            if (this.getComparator() != null) {
-                if (this.getComparator().compare(temp.getKey(), key) < 0) {
-                    break;
-                }
-            } else {
-                if (temp.getKey().compareTo(key) < 0) {
-                    break;
-                }
+            if (this.compare(temp.getKey(), key) < 0) {
+                break;
             }
         }
 
