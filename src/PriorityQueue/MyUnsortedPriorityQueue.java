@@ -9,6 +9,7 @@ public class MyUnsortedPriorityQueue<K extends Comparable<K>, V> extends Abstrac
     private Entry<K, V> maxEntry;
     // Constructors //
     public MyUnsortedPriorityQueue() {
+        super();
     }
 
     public MyUnsortedPriorityQueue(Comparator<K> comparator) {
